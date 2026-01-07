@@ -1,51 +1,140 @@
-# AWS Cloud Portfolio Website
+# Cloud Portfolio on AWS
 
-This project is a personal cloud engineering portfolio built and hosted on AWS.
-It demonstrates progressive AWS skills from basic static hosting to advanced
-cloud-native and DevOps practices.
+## Overview
 
-## Project Goals
-- Build a production-style cloud portfolio
-- Learn and demonstrate AWS core services
-- Apply Infrastructure as Code and CI/CD
-- Create a strong cloud engineering portfolio project
+This project demonstrates a **production-grade, low-cost, serverless static website architecture on AWS**, built incrementally from beginner to mid-level cloud engineering concepts.
 
-## Tech Stack (Planned)
-- AWS S3, CloudFront, Route 53, ACM
-- AWS Lambda, API Gateway, DynamoDB
-- Terraform
-- GitHub Actions
+The portfolio is deployed at a **custom domain with HTTPS**, uses **private S3 access**, and is delivered globally via **CloudFront CDN**.
 
-## Roadmap
-- Phase 0: Git & Project Setup
-- Phase 1: Static Website Hosting on S3
-- Phase 2: Custom Domain & HTTPS
-- Phase 3: CI/CD Automation
-- Phase 4: Serverless Backend
-- Phase 5: Infrastructure as Code
-- Phase 6: Monitoring & Security
+---
 
-## Deployment (Phase 1)
-The portfolio website is hosted as a static site using Amazon S3.
-- Enabled static website hosting
-- Configured public read access via bucket policy
-- Deployed HTML and CSS assets
+## Architecture Diagram
 
-## Phase 2: CDN, HTTPS & Security
-- Added CloudFront distribution for global content delivery
-- Enabled HTTPS with CloudFront
-- Secured S3 using Origin Access Control (OAC)
-- Blocked all public access to S3 bucket
+```
+┌───────────────┐
+│    End User   │
+│  (Web Browser)│
+└───────┬───────┘
+        │ HTTPS (443)
+        ▼
+┌──────────────────────────┐
+│      Amazon CloudFront   │
+│  • Global CDN            │
+│  • HTTPS via ACM         │
+│  • Default Root: index   │
+└──────────┬───────────────┘
+           │ OAC (Signed Requests)
+           ▼
+┌──────────────────────────┐
+│      Amazon S3 Bucket    │
+│  • Static Website Files  │
+│  • Private (No Public)   │
+│  • index.html, css, etc  │
+└──────────────────────────┘
 
-## Phase 3: Custom Domain with Route 53 & ACM
+Route 53 (DNS)
+└── sreekuttancl.com → CloudFront Distribution
 
-- **Registered custom domain**: `sreekuttancl.com`
-- **Created a public hosted zone** in Route 53 to manage DNS
-- **Requested ACM certificate** in `us-east-1` for both `sreekuttancl.com` and `www.sreekuttancl.com`
-  - Validation method: DNS
-- **Added DNS CNAME records** from ACM into Route 53 hosted zone to validate domain
-- **Configured CloudFront** to use the ACM certificate
-- **Pointed domain to CloudFront** using Route 53 alias records
-- **HTTPS enabled** for both root and www subdomain
-- Website is fully **secure, production-ready, and globally distributed**
+ACM (us-east-1)
+└── Public SSL Certificate (DNS Validated)
+```
+
+---
+
+## Phases Breakdown
+
+### Phase 0: Git & Project Setup
+
+* Created local Git repository
+* Pushed source code to GitHub
+* Structured project for future AWS expansion
+
+---
+
+### Phase 1: Website Design & Content
+
+* Built responsive HTML/CSS portfolio
+* Sections: About, Skills, Projects, Contact
+* Optimized for clarity and recruiter readability
+
+---
+
+### Phase 2: Static Hosting with Amazon S3
+
+* Created S3 bucket for static website files
+* Uploaded `index.html`, CSS, and assets
+* Disabled public access after CloudFront integration
+
+---
+
+### Phase 3: CloudFront CDN + Security
+
+* Created CloudFront distribution
+* Configured **Origin Access Control (OAC)**
+* Restricted S3 access to CloudFront only
+* Set default root object (`index.html`)
+* Enabled HTTPS via ACM
+
+---
+
+### Phase 4: Custom Domain with Route 53 & ACM
+
+* Registered and configured custom domain: `sreekuttancl.com`
+* Created **public hosted zone** in Route 53
+* Requested **ACM public certificate (us-east-1)** for:
+
+  * `sreekuttancl.com`
+  * `www.sreekuttancl.com`
+* Validated certificate using DNS (CNAME records)
+* Attached ACM certificate to CloudFront
+* Created Route 53 **Alias A records** pointing domain to CloudFront
+
+Result:
+
+* ✅ HTTPS enabled
+* ✅ Custom domain live
+* ✅ Private S3 origin
+* ✅ Global low-latency delivery
+
+---
+
+## Security Best Practices Applied
+
+* S3 bucket is **not publicly accessible**
+* Access allowed only via CloudFront using OAC
+* HTTPS enforced using ACM-managed certificates
+* No hardcoded credentials or secrets
+
+---
+
+## Cost Considerations
+
+* S3 storage: cents per month
+* CloudFront: near zero for low traffic
+* ACM certificates: free
+* Route 53 hosted zone: ~$0.50/month
+
+Designed to remain **well under $1/month** for a personal portfolio.
+
+---
+
+## Resume / Interview Talking Point
+
+> “I designed and deployed a secure, globally distributed static portfolio website on AWS using S3, CloudFront, ACM, and Route 53. The solution uses private S3 access via Origin Access Control, HTTPS with DNS-validated certificates, and a custom domain, following AWS security and cost best practices.”
+
+---
+
+## Future Enhancements
+
+* CI/CD with GitHub Actions
+* Serverless contact form (API Gateway + Lambda + DynamoDB)
+* Infrastructure as Code (Terraform)
+* Monitoring with CloudWatch
+
+---
+
+**Author:** Sreekuttan Chandran Latha
+**GitHub:** [https://github.com/SreekuttanCL](https://github.com/SreekuttanCL)
+**LinkedIn:** [https://www.linkedin.com/in/sreekuttancl/](https://www.linkedin.com/in/sreekuttancl/)
+
 
