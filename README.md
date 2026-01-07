@@ -31,3 +31,9 @@ The portfolio website is hosted as a static site using Amazon S3.
 - Configured public read access via bucket policy
 - Deployed HTML and CSS assets
 
+## Phase 2: CDN, HTTPS & Security
+- Added CloudFront distribution for global content delivery
+- Enabled HTTPS with CloudFront
+- Secured S3 using Origin Access Control (OAC)
+- Blocked all public access to S3 bucket
+
