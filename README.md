@@ -25,3 +25,9 @@ cloud-native and DevOps practices.
 - Phase 5: Infrastructure as Code
 - Phase 6: Monitoring & Security
 
+## Deployment (Phase 1)
+The portfolio website is hosted as a static site using Amazon S3.
+- Enabled static website hosting
+- Configured public read access via bucket policy
+- Deployed HTML and CSS assets
+
