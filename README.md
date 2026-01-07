@@ -37,3 +37,15 @@ The portfolio website is hosted as a static site using Amazon S3.
 - Secured S3 using Origin Access Control (OAC)
 - Blocked all public access to S3 bucket
 
+## Phase 3: Custom Domain with Route 53 & ACM
+
+- **Registered custom domain**: `sreekuttancl.com`
+- **Created a public hosted zone** in Route 53 to manage DNS
+- **Requested ACM certificate** in `us-east-1` for both `sreekuttancl.com` and `www.sreekuttancl.com`
+  - Validation method: DNS
+- **Added DNS CNAME records** from ACM into Route 53 hosted zone to validate domain
+- **Configured CloudFront** to use the ACM certificate
+- **Pointed domain to CloudFront** using Route 53 alias records
+- **HTTPS enabled** for both root and www subdomain
+- Website is fully **secure, production-ready, and globally distributed**
+
