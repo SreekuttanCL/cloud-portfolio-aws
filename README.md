@@ -118,12 +118,6 @@ Designed to remain **well under $1/month** for a personal portfolio.
 
 ---
 
-## Resume / Interview Talking Point
-
-> “I designed and deployed a secure, globally distributed static portfolio website on AWS using S3, CloudFront, ACM, and Route 53. The solution uses private S3 access via Origin Access Control, HTTPS with DNS-validated certificates, and a custom domain, following AWS security and cost best practices.”
-
----
-
 ## Future Enhancements
 
 * CI/CD with GitHub Actions
