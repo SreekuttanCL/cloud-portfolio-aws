@@ -2,8 +2,7 @@ name: Deploy Portfolio to AWS
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
 
 permissions:
   id-token: write
@@ -14,30 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repo
+      uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::886436948364:role/github-actions-cloud-portfolio-role
+        aws-region: us-east-1
 
-      - name: Debug AWS identity
-        run: aws sts get-caller-identity
-           
-      - name: Debug S3 access
-        run: aws s3 ls s3://sreekuttan-cloud-portfolio --delete
+    - name: Deploy website to S3
+      run: |
+        aws s3 sync website/ s3://sreekuttan-cloud-portfolio --delete
 
+    - name: Invalidate CloudFront cache
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id E1KXEZE0Q2FA5A \
+          --paths "/*"
 
-      - name: Sync website files to S3
-        run: |
-          aws s3 sync . s3://sreekuttan-cloud-portfolio \
-            --exclude ".git/*" \
-            --exclude ".github/*"
-
-      - name: Invalidate CloudFront cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id E1KXEZE0Q2FA5A \
-            --paths "/*"
