@@ -27,7 +27,7 @@ jobs:
         run: aws sts get-caller-identity
            
       - name: Debug S3 access
-        run: aws s3 ls s3://sreekuttan-cloud-portfolio
+        run: aws s3 ls s3://sreekuttan-cloud-portfolio --delete
 
 
       - name: Sync website files to S3
