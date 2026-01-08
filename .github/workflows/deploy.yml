@@ -23,6 +23,9 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Debug AWS identity
+        run: aws sts get-caller-identity
+
       - name: Sync website files to S3
         run: |
           aws s3 sync . s3://sreekuttan-cloud-portfolio \
