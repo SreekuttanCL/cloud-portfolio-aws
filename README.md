@@ -48,7 +48,6 @@ The project demonstrates **end-to-end cloud deployment** and is ideal for **juni
 
 1. **Clone the repo**
 
-```bash
 git clone https://github.com/SreekuttanCL/cloud-portfolio-aws.git
 cd cloud-portfolio-aws
 
