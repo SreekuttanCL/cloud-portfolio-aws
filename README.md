@@ -1,134 +1,77 @@
-# Cloud Portfolio on AWS
+# 🌐 Cloud Portfolio Website
+
+[![GitHub Actions](https://github.com/SreekuttanCL/cloud-portfolio-aws/workflows/Deploy/badge.svg)](https://github.com/SreekuttanCL/cloud-portfolio-aws/actions)  
+[![Terraform](https://img.shields.io/badge/Terraform-v1.14.3-blue?logo=terraform&logoColor=white)](https://www.terraform.io/)  
+
+---
 
 ## Overview
 
-This project demonstrates a **production-grade, low-cost, serverless static website architecture on AWS**, built incrementally from beginner to mid-level cloud engineering concepts.
+This repository contains my **personal portfolio website** hosted on **AWS**, showcasing practical skills in:
 
-The portfolio is deployed at a **custom domain with HTTPS**, uses **private S3 access**, and is delivered globally via **CloudFront CDN**.
+- **AWS S3** – static website hosting  
+- **AWS CloudFront** – CDN for global content delivery  
+- **AWS ACM** – SSL/TLS certificate  
+- **AWS Route 53** – DNS management  
+- **Terraform** – infrastructure as code  
+- **GitHub Actions** – CI/CD automation  
+
+The project demonstrates **end-to-end cloud deployment** and is ideal for **junior to mid-level cloud engineer portfolios**.
+
+---
+
+## Live Website
+
+🌐 [https://www.sreekuttancl.com](https://www.sreekuttancl.com)
 
 ---
 
 ## Architecture Diagram
 
-```
-┌───────────────┐
-│    End User   │
-│  (Web Browser)│
-└───────┬───────┘
-        │ HTTPS (443)
-        ▼
-┌──────────────────────────┐
-│      Amazon CloudFront   │
-│  • Global CDN            │
-│  • HTTPS via ACM         │
-│  • Default Root: index   │
-└──────────┬───────────────┘
-           │ OAC (Signed Requests)
-           ▼
-┌──────────────────────────┐
-│      Amazon S3 Bucket    │
-│  • Static Website Files  │
-│  • Private (No Public)   │
-│  • index.html, css, etc  │
-└──────────────────────────┘
+![Architecture Diagram](https://raw.githubusercontent.com/SreekuttanCL/cloud-portfolio-aws/main/assets/architecture-diagram.png)
 
-Route 53 (DNS)
-└── sreekuttancl.com → CloudFront Distribution
-
-ACM (us-east-1)
-└── Public SSL Certificate (DNS Validated)
-```
 
 ---
 
-## Phases Breakdown
+## Features
 
-### Phase 0: Git & Project Setup
-
-* Created local Git repository
-* Pushed source code to GitHub
-* Structured project for future AWS expansion
-
----
-
-### Phase 1: Website Design & Content
-
-* Built responsive HTML/CSS portfolio
-* Sections: About, Skills, Projects, Contact
-* Optimized for clarity and recruiter readability
+- Fully **static website hosting** on S3  
+- **HTTPS-enabled** via ACM  
+- **Global content delivery** with CloudFront  
+- **Custom domain** management with Route 53  
+- **CI/CD pipeline** automatically deploys changes from GitHub  
+- Infrastructure fully managed with **Terraform**
 
 ---
 
-### Phase 2: Static Hosting with Amazon S3
+## Getting Started
 
-* Created S3 bucket for static website files
-* Uploaded `index.html`, CSS, and assets
-* Disabled public access after CloudFront integration
+1. **Clone the repo**
 
----
+```bash
+git clone https://github.com/SreekuttanCL/cloud-portfolio-aws.git
+cd cloud-portfolio-aws
 
-### Phase 3: CloudFront CDN + Security
+2. Initialize Terraform
 
-* Created CloudFront distribution
-* Configured **Origin Access Control (OAC)**
-* Restricted S3 access to CloudFront only
-* Set default root object (`index.html`)
-* Enabled HTTPS via ACM
+cd terraform
+terraform init
+terraform plan
+terraform apply
 
----
+3. Deploy Website
 
-### Phase 4: Custom Domain with Route 53 & ACM
+- Changes to website/ are automatically deployed via GitHub Actions
 
-* Registered and configured custom domain: `sreekuttancl.com`
-* Created **public hosted zone** in Route 53
-* Requested **ACM public certificate (us-east-1)** for:
-
-  * `sreekuttancl.com`
-  * `www.sreekuttancl.com`
-* Validated certificate using DNS (CNAME records)
-* Attached ACM certificate to CloudFront
-* Created Route 53 **Alias A records** pointing domain to CloudFront
-
-Result:
-
-* ✅ HTTPS enabled
-* ✅ Custom domain live
-* ✅ Private S3 origin
-* ✅ Global low-latency delivery
-
----
-
-## Security Best Practices Applied
-
-* S3 bucket is **not publicly accessible**
-* Access allowed only via CloudFront using OAC
-* HTTPS enforced using ACM-managed certificates
-* No hardcoded credentials or secrets
-
----
-
-## Cost Considerations
-
-* S3 storage: cents per month
-* CloudFront: near zero for low traffic
-* ACM certificates: free
-* Route 53 hosted zone: ~$0.50/month
-
-Designed to remain **well under $1/month** for a personal portfolio.
-
----
-
-## Future Enhancements
-
-* CI/CD with GitHub Actions
-* Serverless contact form (API Gateway + Lambda + DynamoDB)
-* Infrastructure as Code (Terraform)
-* Monitoring with CloudWatch
-
----
 
 **Author:** Sreekuttan Chandran Latha
 **GitHub:** [https://github.com/SreekuttanCL](https://github.com/SreekuttanCL)
-**LinkedIn:** [https://www.linkedin.com/in/sreekuttancl/](https://www.linkedin.com/in/sreekuttancl/)
+**LinkedIn:** [https://www.linkedin.com/in/sreekuttancl/](https://www.linkedin.com/in/sreekuttancl)
+
+
+
+
+
+
 
 
