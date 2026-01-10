@@ -1,6 +1,6 @@
 # 🌐 Cloud Portfolio Website
 
-[![GitHub Actions](https://github.com/SreekuttanCL/cloud-portfolio-aws/workflows/Deploy/badge.svg)](https://github.com/SreekuttanCL/cloud-portfolio-aws/actions)  
+[![Deploy](https://github.com/SreekuttanCL/cloud-portfolio-aws/actions/workflows/deploy.yml/badge.svg)](https://github.com/SreekuttanCL/cloud-portfolio-aws/actions/workflows/deploy.yml)
 [![Terraform](https://img.shields.io/badge/Terraform-v1.14.3-blue?logo=terraform&logoColor=white)](https://www.terraform.io/)  
 
 ---
