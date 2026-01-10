@@ -28,7 +28,7 @@ The project demonstrates **end-to-end cloud deployment** and is ideal for **juni
 
 ## Architecture Diagram
 
-![Architecture Diagram](https://raw.githubusercontent.com/SreekuttanCL/cloud-portfolio-aws/main/assets/architecture-diagram.png)
+![Architecture Diagram](assets/architecture-diagram.png)
 
 
 ---
