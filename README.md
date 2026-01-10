@@ -67,8 +67,8 @@ terraform apply
 - Changes to website/ are automatically deployed via GitHub Actions
 
 
-**Author:** Sreekuttan Chandran Latha
-**GitHub:** [https://github.com/SreekuttanCL](https://github.com/SreekuttanCL)
+**Author:** Sreekuttan Chandran Latha  
+**GitHub:** [https://github.com/SreekuttanCL](https://github.com/SreekuttanCL)  
 **LinkedIn:** [https://www.linkedin.com/in/sreekuttancl/](https://www.linkedin.com/in/sreekuttancl)
 
 
