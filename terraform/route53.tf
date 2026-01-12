@@ -2,7 +2,7 @@ resource "aws_route53_zone" "portfolio" {
   name = "sreekuttancl.com"
 }
 
-resource "aws_route53_record" "portfolio_alias" {
+resource "aws_route53_record" "root_alias" {
   zone_id = aws_route53_zone.portfolio.zone_id
   name    = "sreekuttancl.com"
   type    = "A"
@@ -25,6 +25,4 @@ resource "aws_route53_record" "www_alias" {
     evaluate_target_health = false
   }
 }
-
-
 
