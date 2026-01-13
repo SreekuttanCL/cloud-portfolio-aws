@@ -7,25 +7,6 @@
   <link rel="stylesheet" href="/style.css" />
 </head>
 
-<script>
-async function getVisitorCount() {
-  try {
-    const response = await fetch("https://nw72xq0543.execute-api.us-east-1.amazonaws.com/prod");
-    if (!response.ok) throw new Error("API request failed");
-
-    const data = await response.json();          // Step 1: parse API Gateway wrapper
-    const visitors = JSON.parse(data.body).visitors; // Step 2: parse Lambda JSON body
-
-    document.getElementById("visitor-count").innerText = visitors;
-  } catch (error) {
-    console.error("Error fetching visitor count:", error);
-  }
-}
-
-// Call once on page load
-getVisitorCount();
-</script>
-
 <body>
   <!-- HEADER -->
   <header class="hero">
@@ -37,10 +18,10 @@ getVisitorCount();
       <a href="https://github.com/SreekuttanCL" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/sreekuttancl/" target="_blank">LinkedIn</a>
     </div>
+
     <div>
       Visitors: <span id="visitor-count">0</span>
     </div>
-
   </header>
 
   <!-- ABOUT -->
@@ -110,6 +91,29 @@ getVisitorCount();
   <footer>
     <p>© 2026 Sreekuttan Chandran Latha</p>
   </footer>
+
+  <!-- VISITOR COUNTER SCRIPT -->
+  <script>
+    async function getVisitorCount() {
+      try {
+        const response = await fetch("https://nw72xq0543.execute-api.us-east-1.amazonaws.com/prod");
+        if (!response.ok) throw new Error("API request failed");
+
+        const data = await response.json();                  // Parse API Gateway wrapper
+        const visitors = JSON.parse(data.body).visitors;     // Parse Lambda JSON body
+
+        document.getElementById("visitor-count").innerText = visitors;
+      } catch (error) {
+        console.error("Error fetching visitor count:", error);
+      }
+    }
+
+    // Call once on page load
+    getVisitorCount();
+
+    // Optional: auto-refresh every 10 seconds
+    setInterval(getVisitorCount, 10000);
+  </script>
 </body>
 </html>
 
