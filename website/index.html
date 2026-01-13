@@ -12,21 +12,19 @@ async function getVisitorCount() {
   try {
     const response = await fetch("https://nw72xq0543.execute-api.us-east-1.amazonaws.com/prod");
     if (!response.ok) throw new Error("API request failed");
-    
-    const data = await response.json();
-    // Parse the JSON body from Lambda
-    const visitors = JSON.parse(data.body).visitors;
-    
+
+    const data = await response.json();          // Step 1: parse API Gateway wrapper
+    const visitors = JSON.parse(data.body).visitors; // Step 2: parse Lambda JSON body
+
     document.getElementById("visitor-count").innerText = visitors;
   } catch (error) {
     console.error("Error fetching visitor count:", error);
   }
 }
 
-// Fetch once on page load
+// Call once on page load
 getVisitorCount();
 </script>
-
 
 <body>
   <!-- HEADER -->
