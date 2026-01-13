@@ -96,11 +96,16 @@
   <script>
     async function getVisitorCount() {
       try {
-        const response = await fetch("https://nw72xq0543.execute-api.us-east-1.amazonaws.com/prod");
+        // Add cache-busting timestamp to avoid browser caching
+        const response = await fetch(
+          "https://nw72xq0543.execute-api.us-east-1.amazonaws.com/prod?cache=" + new Date().getTime()
+        );
         if (!response.ok) throw new Error("API request failed");
 
-        const data = await response.json();                  // Parse API Gateway wrapper
-        const visitors = JSON.parse(data.body).visitors;     // Parse Lambda JSON body
+        // Parse API Gateway wrapper
+        const data = await response.json();
+        // Parse Lambda JSON body
+        const visitors = JSON.parse(data.body).visitors;
 
         document.getElementById("visitor-count").innerText = visitors;
       } catch (error) {
@@ -111,7 +116,7 @@
     // Call once on page load
     getVisitorCount();
 
-    // Optional: auto-refresh every 10 seconds
+    // Auto-refresh every 10 seconds (optional)
     setInterval(getVisitorCount, 10000);
   </script>
 </body>
