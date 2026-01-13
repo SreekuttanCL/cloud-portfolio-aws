@@ -87,34 +87,38 @@
 
     async function getVisitorCount() {
       try {
-        // Add timestamp to avoid caching
-        const url = API_URL + "?cache=" + new Date().getTime();
-
+        const url = API_URL + "?cache=" + new Date().getTime(); // cache-busting
         const response = await fetch(url, { method: "GET" });
+
         console.log("API Gateway response status:", response.status);
 
         if (!response.ok) throw new Error("API request failed: " + response.status);
 
-        // Parse API Gateway wrapper
         const data = await response.json();
-        console.log("API Gateway response body:", data);
+        console.log("API Gateway response data:", data);
 
         if (!data.body) throw new Error("No body in API response");
 
-        // Parse Lambda JSON body
         const visitors = JSON.parse(data.body).visitors;
+        console.log("Visitors count from Lambda:", visitors);
 
-        document.getElementById("visitor-count").innerText = visitors;
+        const counterElement = document.getElementById("visitor-count");
+        if (counterElement) {
+          counterElement.textContent = visitors; // safely update DOM
+          console.log("Visitor counter updated in DOM");
+        } else {
+          console.error("visitor-count element not found in DOM");
+        }
       } catch (error) {
         console.error("Error fetching visitor count:", error);
       }
     }
 
-    // Call once on page load
-    getVisitorCount();
-
-    // Auto-refresh every 10 seconds (optional)
-    setInterval(getVisitorCount, 10000);
+    // Ensure DOM is fully loaded before running
+    window.addEventListener("DOMContentLoaded", () => {
+      getVisitorCount();               // initial load
+      setInterval(getVisitorCount, 10000); // auto-refresh every 10 sec
+    });
   </script>
 </body>
 </html>
