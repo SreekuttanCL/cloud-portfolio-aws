@@ -123,3 +123,17 @@ footer {
   color: #94a3b8;
 }
 
+.project-links a.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  border-color: #aaa;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+
